@@ -19,6 +19,7 @@ import java.net.URLEncoder;
 public class BackgroundLogin extends AsyncTask<String,Void,String> {
     Context context;
     AlertDialog alertDialog;
+
     BackgroundLogin(Context ctx){
         context=ctx;
     }

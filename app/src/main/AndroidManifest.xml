@@ -18,8 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminAct" />
-        <activity android:name=".Waitres"></activity>
+        <activity
+            android:name=".AdminAct"
+            android:exported="true" />
+        <activity
+            android:name=".waitres"
+            android:exported="true" />
     </application>
 
 </manifest>

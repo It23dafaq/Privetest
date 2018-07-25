@@ -4,12 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Waitres"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context=".waitres">
+
+    <TextView
+        android:id="@+id/Vodka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="86dp" />
 
     <TabHost
-        android:layout_width="392dp"
-        android:layout_height="397dp"
+        android:layout_width="438dp"
+        android:layout_height="449dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -29,15 +36,15 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/Drinks"
-                    android:layout_width="match_parent"
-                    android:layout_height="359dp"
+                    android:id="@+id/tab1"
+                    android:layout_width="1187dp"
+                    android:layout_height="399dp"
                     android:orientation="vertical">
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Other"
+                    android:id="@+id/tab2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -45,7 +52,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Order"
+                    android:id="@+id/tab3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -55,19 +62,4 @@
         </LinearLayout>
     </TabHost>
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="437dp" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="437dp" />
 </android.support.constraint.ConstraintLayout>
