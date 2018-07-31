@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                Onlogin(v);
-                startActivity(new Intent(MainActivity.this, waitres.class));
+                startActivity(new Intent(MainActivity.this, waitress.class));
             }
         });
     }

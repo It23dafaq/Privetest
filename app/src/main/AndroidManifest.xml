@@ -24,6 +24,10 @@
         <activity
             android:name=".waitres"
             android:exported="true" />
+        <activity
+            android:name=".waitress"
+            android:label="@string/title_activity_waitress"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

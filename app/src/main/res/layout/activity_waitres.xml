@@ -9,7 +9,8 @@
 
     <TabHost
         android:layout_width="match_parent"
-        android:layout_height="441dp">
+        android:layout_height="441dp"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +20,9 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible" />
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -27,7 +30,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/tab1"
+                    android:id="@+id/Drinks"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -35,16 +38,19 @@
                     <Spinner
                         android:id="@+id/spinner"
                         android:layout_width="130dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="38dp" />
 
-                    <TextView
-                        android:id="@+id/Vodka"
-                        android:layout_width="281dp"
-                        android:layout_height="331dp" />
+                    <ListView
+                        android:id="@+id/drinklist"
+                        android:layout_width="match_parent"
+                        android:layout_height="352dp">
+
+
+                    </ListView>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/tab2"
+                    android:id="@+id/Other"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -52,10 +58,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/tab3"
+                    android:id="@+id/Order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:visibility="visible">
 
                 </LinearLayout>
             </FrameLayout>
