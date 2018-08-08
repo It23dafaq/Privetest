@@ -2,6 +2,7 @@ package com.example.dafou.privetest;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -76,6 +77,14 @@ public class BackgroundLogin extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String resault) {
         alertDialog.setMessage(resault);
+        alertDialog.show();
+        if (resault.equals("login succespanos")){
+
+        }else if (resault.equals("login succes")){
+
+        }else {
+            alertDialog.show();
+        }
         alertDialog.show();
     }
 
