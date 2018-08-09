@@ -1,9 +1,5 @@
 package com.example.dafou.privetest;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.provider.SyncStateContract;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class waitress extends AppCompatActivity {
+public class FinalAdmin extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,22 +35,11 @@ public class waitress extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    public static Button add;
-    public String user;
-    private OrderTab co;
-    private String names;
-    public String usernam;
-    public String MY_PREFS_NAME = "MyPrefsFile";
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waitress);
+        setContentView(R.layout.activity_final_admin);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,41 +56,15 @@ public class waitress extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        Intent intent = getIntent();
-        usernam = intent.getStringExtra("name");
-       // OrderTab f = new OrderTab();
-        // Supply index input as an argument.
-     //   Bundle args = new Bundle();
-       // args.putString("index", usernam);
-        //f.setArguments(args);
-        SharedPreferences.Editor editor = getSharedPreferences( MY_PREFS_NAME,MODE_PRIVATE).edit();
-        editor.putString("name", usernam);
-        editor.apply();
-
-
-
 
 
     }
 
 
-        /*Intent intent = getIntent();
-        String message = intent.getStringExtra("Price");
-        Bundle bundle=new Bundle();
-        bundle.putString("Price", message);
-        //set Fragmentclass Arguments
-        OrderTab fragobj=new OrderTab();
-        fragobj.setArguments(bundle);
-
-*/
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_waitress, menu);
+        getMenuInflater().inflate(R.menu.menu_final_admin, menu);
         return true;
     }
 
@@ -126,7 +83,40 @@ public class waitress extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
 
+        public PlaceholderFragment() {
+        }
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_final_admin, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            return rootView;
+        }
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -140,20 +130,21 @@ public class waitress extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-           switch (position){
-               case 0:
-                   DrinkTab tab1 = new DrinkTab();
 
-                   return tab1;
-               case 1:
-                   OtherTab tab2 = new OtherTab();
-                   return tab2;
-               case 2:
-                   OrderTab tab3 = new OrderTab();
-                   return tab3;
-                   default:
-                       return null;
-           }
+                switch (position){
+                    case 0:
+                        AdminOrder tab1 = new AdminOrder();
+
+                        return tab1;
+                    case 1:
+                        AdminPerOrder tab2 = new AdminPerOrder();
+                        return tab2;
+                    case 2:
+                        AdminExoda tab3 = new AdminExoda();
+                        return tab3;
+                    default:
+                        return null;
+                }
         }
 
         @Override
@@ -161,28 +152,5 @@ public class waitress extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
-        @Override
-        public CharSequence getPageTitle(int position) {
-           switch (position){
-               case 0:
-                   return "Drinks";
-               case 1:
-                   return "Others";
-               case 2:
-                   return "Orders";
-
-           }
-           return null;
-
-        }
     }
-    public static OrderTab newInstance(String index) {
-        OrderTab f = new OrderTab();
-        // Supply index input as an argument.
-        Bundle args = new Bundle();
-        args.putString("index", index);
-        f.setArguments(args);
-        return f;
-    }
-
 }

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
             alertDialog.show();
             if (resault.equals("connectedlogin succes panos")){
-                startActivity(new Intent(MainActivity.this, AdminAct.class));
+                startActivity(new Intent(MainActivity.this, FinalAdmin.class));
 
             }else if (resault.equals("connectedlogin succes")){
                 //startActivity(new Intent(MainActivity.this, waitress.class));

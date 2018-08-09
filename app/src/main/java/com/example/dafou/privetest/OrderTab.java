@@ -3,14 +3,17 @@ package com.example.dafou.privetest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Debug;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +44,14 @@ public class OrderTab extends Fragment {
     private TextView ordertext;
     public Button printInsert;
     private DrinkTab dt;
-    public String price;
-    public ArrayList ar;
-    public String[] finalar;
-    private String names;
-    public ArrayList finalOrder;
-    public String nameDrink ="",namePrice="",name="";
-    static AlertDialog alertDialog;
+    private ArrayList<String> finalOrder;
+    private String nameDrink ="",how_many="",name="";
+    private ArrayAdapter adapter;
+    public String extra;
+    public String total="";
+
+
+
 
 
 
@@ -58,6 +62,8 @@ public class OrderTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         finalOrder = new ArrayList<String>();
+         adapter = new ArrayAdapter<String>(
+                getActivity().getBaseContext(), android.R.layout.simple_selectable_list_item, finalOrder);
        // Bundle args = getArguments();
        // username = (TextView)rootView.findViewById(R.id.username);
       //  if(args!=null) {
@@ -79,45 +85,45 @@ public class OrderTab extends Fragment {
         printInsert = (Button) rootView.findViewById(R.id.Print);
         orders = (GridView) rootView.findViewById(R.id.orders);
         dt = new DrinkTab();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                getActivity().getBaseContext(), android.R.layout.simple_selectable_list_item, finalOrder);
+       int counter=0;
+       waitress wt = new waitress();
+        if (adapter != null  ) {
 
+            orders.setAdapter(adapter);
+        }
         username=(TextView)rootView.findViewById(R.id.userna);
-        SharedPreferences prefs = getActivity().getSharedPreferences(waitress.MY_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(wt.MY_PREFS_NAME, Context.MODE_PRIVATE);
         String restoredText = prefs.getString("name", null);
         if (restoredText != null) {
             name = prefs.getString("name", null);//"No name defined" is the default value.
             username.setText(name);
-            adapter.add(name);
+           finalOrder.add(name);
+           counter++;
 
-
-
-        }
-        SharedPreferences prefs1 = getActivity().getSharedPreferences(DrinkTab.MY_PREFS_NAMEO, Context.MODE_PRIVATE);
+           }
+      DrinkTab dt = new DrinkTab();
+        SharedPreferences prefs1 = getActivity().getSharedPreferences(dt.MY_PREFS_NAMEO, Context.MODE_PRIVATE);
         String DrinkName = prefs1.getString("Drink", null);
         String DrinkPrice = prefs1.getString("Price", null);
-        if (DrinkName != null && DrinkPrice!=null) {
+        String extra1 = prefs1.getString("extra", null);
+        String total1 = prefs1.getString("how", null);
+        username.setText(extra);
+        if (DrinkName != null && DrinkPrice!=null && extra1!=null && total1!=null) {
              nameDrink = prefs1.getString("Drink", null);//"No name defined" is the default value.
-             namePrice = prefs1.getString("Price", null);//"No name defined" is the default value.
-            adapter.add(nameDrink);
-            adapter.add(namePrice);
-
-
-        }
-
-        if (adapter != null) {
-
-
-
-
-
-                orders.setAdapter(adapter);
-
-
-
-
+             total = prefs1.getString("Price", null);//"No name defined" is the default value.
+            extra=prefs1.getString("extra", null);//"No name defined" is the default value.
+            how_many=prefs1.getString("how",null);//
+            finalOrder.add(how_many);
+            counter++;
+            finalOrder.add(nameDrink+" "+extra);
+            counter++;
+           finalOrder.add(total);
 
         }
+
+
+
+
 
 
 
@@ -136,8 +142,26 @@ public class OrderTab extends Fragment {
             printInsert.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setCancelable(true);
+                    builder.setTitle("Send/Print");
+                    builder.setMessage("Εισαι σιγουρος οτι η παραγγελια ειναι σωστη?");
+                    builder.setPositiveButton("Confirm",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    (new inserOrder()).execute(how_many,name,nameDrink+" "+extra,total);
+                                }
+                            });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
 
-                    (new inserOrder()).execute(name,nameDrink,namePrice);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
 
                 }
             });
@@ -155,9 +179,11 @@ public class OrderTab extends Fragment {
             String login_url = "https://rectifiable-merchan.000webhostapp.com/InsertOrder.php";
 
              try {
-                 String user_name = params[0];
-                 String drink_name = params[1];
-                 String drink_price = params[2];
+                 String how_many= params[0];
+                 String user_name = params[1];
+                 String drink_name = params[2];
+                 String drink_price = params[3];
+                 String comments=params[4];
                  URL url = new URL(login_url);
                  HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                  httpURLConnection.setRequestMethod("POST");
@@ -165,9 +191,11 @@ public class OrderTab extends Fragment {
                  httpURLConnection.setDoInput(true);
                  OutputStream outputStream = httpURLConnection.getOutputStream();
                  BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                 String Post_data = URLEncoder.encode("UserName","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
+                 String Post_data =  URLEncoder.encode("How_Many","UTF-8")+"="+URLEncoder.encode(how_many,"UTF-8")+"&"
+                         +URLEncoder.encode("UserName","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
                          +URLEncoder.encode("DrinkName","UTF-8")+"="+URLEncoder.encode(drink_name,"UTF-8")+"&"
-                         +URLEncoder.encode("Price","UTF-8")+"="+URLEncoder.encode(drink_price,"UTF-8");
+                         +URLEncoder.encode("Price","UTF-8")+"="+URLEncoder.encode(drink_price,"UTF-8")+"&"
+                         +URLEncoder.encode("Comments","UTF-8")+"="+URLEncoder.encode(comments,"UTF-8");
                  bufferedWriter.write(Post_data);
                  bufferedWriter.flush();
                  bufferedWriter.close();

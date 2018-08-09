@@ -27,6 +27,10 @@
         <activity
             android:name=".waitress"
             android:label="@string/title_activity_waitress"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FinalAdmin"
+            android:label="@string/title_activity_final_admin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

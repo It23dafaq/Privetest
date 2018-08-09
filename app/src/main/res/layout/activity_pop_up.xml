@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#545454">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:autoText="false"
+        android:text="Extra"
+        android:textSize="50sp"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/Confirm"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rad"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="122dp"
+        android:text="Confirm" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/Confirm"
+        android:layout_marginEnd="13dp"
+        android:text="Cancel" />
+
+    <RadioGroup
+        android:id="@+id/rad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/soda"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/coca"
+            android:layout_marginTop="128dp"
+            android:text="Soda" />
+
+        <RadioButton
+            android:id="@+id/coca"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="CocaCola" />
+
+        <RadioButton
+            android:id="@+id/fanta3"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/fanta"
+            android:layout_alignTop="@+id/soda"
+            android:text="Ice Tea Lemon" />
+
+        <RadioButton
+            android:id="@+id/fanta2"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/coca"
+            android:layout_centerVertical="true"
+            android:text="Bisino" />
+
+        <RadioButton
+            android:id="@+id/spite"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/coca"
+            android:layout_marginEnd="18dp"
+            android:text="Sprite" />
+
+        <RadioButton
+            android:id="@+id/fanta"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/coca"
+            android:layout_marginEnd="119dp"
+            android:text="Portokalada" />
+
+    </RadioGroup>
+
+</RelativeLayout>
