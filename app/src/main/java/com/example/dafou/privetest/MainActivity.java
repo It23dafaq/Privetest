@@ -7,7 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
             alertDialog.show();
             if (resault.equals("connectedlogin succes panos")){
-                startActivity(new Intent(MainActivity.this, FinalAdmin.class));
+                startActivity(new Intent(MainActivity.this, AdminAct.class));
 
             }else if (resault.equals("connectedlogin succes")){
                 //startActivity(new Intent(MainActivity.this, waitress.class));
