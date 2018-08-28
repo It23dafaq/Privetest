@@ -87,10 +87,7 @@ public class OrderTab extends Fragment {
         dt = new DrinkTab();
        int counter=0;
        waitress wt = new waitress();
-        if (adapter != null  ) {
 
-            orders.setAdapter(adapter);
-        }
         username=(TextView)rootView.findViewById(R.id.userna);
         SharedPreferences prefs = getActivity().getSharedPreferences(wt.MY_PREFS_NAME, Context.MODE_PRIVATE);
         String restoredText = prefs.getString("name", null);
@@ -123,7 +120,19 @@ public class OrderTab extends Fragment {
 
 
 
+        if (adapter != null  ) {
 
+
+
+
+
+                orders.setAdapter(adapter);
+
+
+
+
+
+        }
 
 
 
